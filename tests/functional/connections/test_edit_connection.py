@@ -25,7 +25,7 @@ def test_can_change_connection_type(db, testapp):
     json_connection_edit = {
         'type': 'sister',
     }
-    res = testapp.patch('/connections/' + str(res.json['id']),  json=json_connection_edit)
+    res = testapp.patch(f'/connections/{res.json["id"]}',  json=json_connection_edit)
 
     assert res.status_code == HTTPStatus.OK
     assert res.json['connection_type'] == 'sister'
@@ -47,6 +47,6 @@ def test_gives_if_connect_type_not_allowed_gives_error(db, testapp):
         'type': 'not allowed',
     }
 
-    res = testapp.patch('/connections/' + str(res.json['id']),  json=json_connection_edit)
+    res = testapp.patch(f'/connections/{res.json["id"]}',  json=json_connection_edit)
 
     assert res.status_code == 403
