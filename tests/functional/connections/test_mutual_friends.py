@@ -38,5 +38,5 @@ def test_mutual_friends(db, testapp):
     assert len(res.json) == 2  # manually counted
 
     # To persons are mutual and should match ids
-    assert res.json[0]['to_person']['id'] == person_to1.id
-    assert res.json[1]['to_person']['id'] == person_to2.id
+    for result in res.json:
+        assert result['id'] in person_to_ids

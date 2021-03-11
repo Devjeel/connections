@@ -2,7 +2,7 @@
 # from tests.factories import ConnectionFactory, PersonFactory
 
 
-""" Objective 1: commenting some failed tests
+""" Test fails due to connectionFactory error
 @pytest.mark.xfail
 def test_mutual_friends(db):
     instance = PersonFactory()
@@ -26,6 +26,7 @@ def test_mutual_friends(db):
 
     expected_mutual_friend_ids = [f.id for f in mutual_friends]
 
+    # Mutual_friends added to the model
     results = instance.mutual_friends(target)
 
     assert len(results) == 3

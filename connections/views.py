@@ -70,6 +70,20 @@ def edit_connections(id):
     return jsonify(edited_connection), HTTPStatus.OK
 
 
+@blueprint.route('/connections/<int:id>/mutual_friends', methods=['GET'])
+def get_mutual_connections(id):
+    target_person_id = request.args.get('target_id', None)
+    mutual_connections = []
+
+    if target_person_id:
+        instance_person = Person.query.filter_by(id=id).first()
+
+        mutual_connections = instance_person.mutual_friends(target_person_id)
+
+    # Can also use PersonSchema to return data
+    return jsonify([person.format() for person in mutual_connections]), HTTPStatus.OK
+
+
 def validate_type(type):
     # loop through the existing types enum, if found return true else abort.
 
