@@ -9,3 +9,12 @@ class Person(Model, CRUDMixin, CreatedUpdatedMixin):
     date_of_birth = db.Column(db.Date, nullable=False)
 
     connections = db.relationship('Connection', foreign_keys='Connection.from_person_id')
+
+    def format(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'date_of_birth': self.date_of_birth,
+        }
